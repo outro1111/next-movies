@@ -8,12 +8,11 @@ async function getMovieDetail(id) {
   return data
 }
 
-export default async function MovieDetail({ params: {id} }) {
+export default async function MovieDetailPage({ params: {id} }) {
   const movie = await getMovieDetail(id)
   const casts = movie.attributes.cast
   const photos = movie.attributes.image.data
   // console.log(id);
-  // console.log(casts);
   return (
     <>
     <div className="detail_movie">

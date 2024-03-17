@@ -73,13 +73,13 @@ html {position:relative;width:100%;height:100%;overflow-y:scroll}
 #header>*{flex:1;}
 #header h1 {position:relative;text-align:center}
 #header h1 img {position:relative;top:.7rem;width:clamp(120px, 11vw, 204px);transform:scaleY(.9);}
-#header h1 a, #header h1 a.router-link-active {position:relative;font-size:var(--font-size-title2);}
+#header h1 a, #header h1 a.active {position:relative;font-size:var(--font-size-title2);}
 html.light-mode #header h1 .logo_dark, html.dark-mode #header h1 .logo_light {display:none}
 #header nav {order:-1;}
 #header nav ul {display:flex;}
 #header nav li {margin-right:clamp(2px, 1.5vw, 6px)}
 #header nav ul a {padding:.2rem .5rem;font-size:var(--font-size-small1)}
-#header nav ul a.router-link-active, #header nav ul a:hover {color:var(--color-text-inversion);background:var(--color-bg)}
+#header nav ul a.active, #header nav ul a:hover {color:var(--color-text-inversion);background:var(--color-bg)}
 #header .util {display:flex;justify-content:flex-end;}
 #header .btn_darkmode {position:relative;width:23px;height:23px;margin:13px 0 0 clamp(8px, 1vw, 12px);padding:0;border:0 none;cursor:pointer;mask-position:center 1px;mask-repeat:no-repeat;background:var(--color-text);mask-image:var(--icon-darkmode-dark);}
 html.dark-mode #header .btn_darkmode {mask-image:var(--icon-darkmode-light);}
@@ -118,21 +118,21 @@ html.dark-mode #header .btn_darkmode {mask-image:var(--icon-darkmode-light);}
 #header .lang_layer.active .lang_layer_in {width:auto;height:auto;z-index:10}
 #header .lang_layer.active .lang_menu {position:relative;z-index:11}
 #header .lang_layer.active .lang_menu a {display:block;font-size:var(--font-size-small1);padding:3px 14px;margin:2px 0}
-#header .lang_layer.active .lang_menu a.router-link-active {color:var(--color-blue);background:var(--color-layer-bg)}
+#header .lang_layer.active .lang_menu a.active {color:var(--color-blue);background:var(--color-layer-bg)}
 #header .langLayerfade-enter-active, #header .langLayerfade-leave-active {transition:all .3s ease-out;}
 #header .langLayerfade-enter-from {opacity:0;transform:translateY(5px);}
 #header .langLayerfade-leave-to {opacity:0;transform:translateY(-5px);}
 
-.main #header {position:absolute;top:0;left:0;right:0;z-index:5}
-.main #header nav ul a, .main #header h1 a, .main #header h1 a.router-link-active {color:var(--color-fix-white)}
-.main #header nav ul a.router-link-active, .main #header nav ul a:hover {color:var(--color-fix-black);background:var(--color-fix-white)}
-.main #header .btn_darkmode {background:var(--color-fix-white)}
-.main #header .btn_lang {background:var(--color-fix-white)}
-.main #header .search_area .btn_search {background:var(--color-fix-white)}
-.main #header .search_area .search_input {color:var(--color-fix-white);background:none;border:0 none;border-bottom:1px solid var(--color-fix-white);}
-.main #header .search_area .search_input::placeholder {color:#aaa}
-.main #header .login_area .btn_login em {background:var(--color-fix-white)}
-.main #header .login_area.login_is .btn_login .arrow {background:var(--color-fix-white)}
+#header.main {position:absolute;top:0;left:0;right:0;z-index:5}
+#header.main nav ul a, #header.main h1 a, #header.main h1 a.active {color:var(--color-fix-white)}
+#header.main nav ul a.active, #header.main nav ul a:hover {color:var(--color-fix-black);background:var(--color-fix-white)}
+#header.main .btn_darkmode {background:var(--color-fix-white)}
+#header.main .btn_lang {background:var(--color-fix-white)}
+#header.main .search_area .btn_search {background:var(--color-fix-white)}
+#header.main .search_area .search_input {color:var(--color-fix-white);background:none;border:0 none;border-bottom:1px solid var(--color-fix-white);}
+#header.main .search_area .search_input::placeholder {color:#aaa}
+#header.main .login_area .btn_login em {background:var(--color-fix-white)}
+#header.main .login_area.login_is .btn_login .arrow {background:var(--color-fix-white)}
 @media screen and (max-width:800px) {
   #header {padding:3rem 2rem 1rem}
   #header .search_area.active {width:100%;flex:1}
@@ -155,7 +155,7 @@ html.dark-mode #header .btn_darkmode {mask-image:var(--icon-darkmode-light);}
 .btn:disabled {border:1px solid var(--color-disabled-border);color:var(--color-text-secondary);background:var(--color-disabled-bg);}
 .btn:disabled:before {display:none;}
 
-.main_movie {position:relative;height:100vh;margin-bottom:4rem}
+.main_movie {position:relative;height:90vh;margin-bottom:4rem}
 .main_movie:before {content:'';position:absolute;top:0;right:0;bottom:0;left:0;background:rgba(0, 0, 0, 0.30)}
 .main_movie:after {content:'';position:absolute;top:0;right:0;bottom:0;left:0;background:linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.3) 32%, rgba(0,0,0,0) 57%, rgba(0,0,0,0) 100%)}
 .main_movie img {height:100%;width:100%;object-position:center;object-fit:cover}
@@ -170,17 +170,21 @@ html.dark-mode #header .btn_darkmode {mask-image:var(--icon-darkmode-light);}
 } */
 .search_result {position:relative;width:100%;text-align:center;font-size:var(--font-size-content2);margin:clamp(20px, 2vw, 30px) 0}
 .search_result strong {color:var(--color-blue)}
-.list {display:flex;flex-wrap:wrap;justify-content:flex-start;align-content:stretch;gap:2%;width:100%;max-width:1600px;padding:0 2rem;margin:1rem auto}
+.list {display:flex;flex-wrap:wrap;justify-content:center;align-content:stretch;;gap:1.5%;width:100%;max-width:1600px;padding:0 2rem;margin:1rem auto}
 .list li {flex:0 0 32%;white-space:normal;position:relative;overflow:hidden;padding:clamp(20px, 2vw, 30px) 0 clamp(30px, 3vw, 45px);text-align:center}
 .list li .thumb {position:relative;overflow: hidden;aspect-ratio: auto 9/6;}
 .list li .thumb img {position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transform:scale(1.1,1.1);transition:all ease .9s}
 .list li .thumb:hover img {transform:scale3d(1.0,1.0,1.0);}
-.list li .title {margin:clamp(12px, 1.5vw, 18px) 0 0;font-size:var(--font-size-title1);font-weight:600;text-align:center;width:100%;text-overflow:ellipsis;overflow:hidden;word-wrap:break-word;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;}
-.list li .titleOriginal {margin:0 0 clamp(12px, 1.5vw, 16px);font-size:var(--font-size-small1);text-align:center;line-height:1;color:var(--color-text-secondary);width:100%;text-overflow:ellipsis;overflow:hidden;word-wrap:break-word;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;}
+.list li .title {margin-top:clamp(12px, 1.5vw, 18px);font-size:var(--font-size-title1);font-weight:600;text-align:left;width:100%;text-overflow:ellipsis;overflow:hidden;word-wrap:break-word;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;}
+.list li .titleOriginal {margin-bottom:clamp(12px, 1.5vw, 16px);font-size:var(--font-size-small1);text-align:left;line-height:1;color:var(--color-text-secondary);width:100%;text-overflow:ellipsis;overflow:hidden;word-wrap:break-word;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;}
 .list li .description p {font-size:var(--font-size-content1);text-align:left;text-overflow:ellipsis;overflow:hidden;word-wrap:break-word;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;}
-.list li h2, .list li p {margin-left:2rem;margin-right:2rem;}
+.list li .info {display:flex;margin:0.5rem 0}
+.list li .genre {border:1px solid var(--color-layer-border);padding:0 .6rem;border-radius:10rem;font-size:var(--font-size-small1);color:var(--color-text-secondary);line-height:1.6;}
+.list li .info .openingDate {padding:.0 .6rem;font-size:var(--font-size-small1);color:var(--color-text-secondary)}
+.list li h2, .list li p {margin-left:0.2rem;margin-right:0.2rem;}
 @media screen and (max-width:800px) {
-  .list {flex-direction:column}
+  .list {flex-direction:column;padding:0}
+  .list li h2, .list li p {margin-left:4rem;margin-right:4rem;}
   .list li .thumb img, .list li .thumb:hover img {transform:none}
 }
 .nodata {text-align:center;padding:clamp(190px, 2vw, 200px) 0;font-size:var(--font-size-content1);background:var(--icon-nodata) no-repeat center clamp(100px, 1.5vw, 110px);background-size:clamp(60px, 2vw, 70px) clamp(60px, 2vw, 70px)}
@@ -234,7 +238,7 @@ html.dark-mode #header .btn_darkmode {mask-image:var(--icon-darkmode-light);}
   .detail_movie {padding:0}
   .detail_movie .detail_top {height:50vh;}
   .detail_movie .detail_top .top_bg img {height:50vh}
-  .detail_movie .detail_con {padding:0 6rem}
+  .detail_movie .detail_con {padding:0 4rem}
   .detail_movie .detail_title {margin:50px 0 10px}
   .detail_movie .poster {position: relative;top:auto;left:auto;width:auto;margin-top:8rem;text-align:center}
   .detail_movie .cast li {width:90px}
