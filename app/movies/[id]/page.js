@@ -2,7 +2,8 @@ import Image from "next/image"
 
 async function getMovieDetail(id) {
   // await new Promise((resolve) => setTimeout(resolve, 2000))
-  const res = await fetch(`https://strapi-movies-production.up.railway.app/api/movies/${id}?populate[0]=poster&populate[1]=cast.photo&populate[2]=image`)
+  // const res = await fetch(`https://strapi-movies-production.up.railway.app/api/movies/${id}?populate[0]=poster&populate[1]=cast.photo&populate[2]=image`)
+  const res = await fetch(`${process.env.API_URL}api/movies/${id}?populate[0]=poster&populate[1]=cast.photo&populate[2]=image`)
   const json = await res.json()
   const data = json.data
   return data

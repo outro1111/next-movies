@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={pretendard.className}>
-        <div id="wrap" className="main">
+        <div id="wrap">
           <Navbar />
           <div id="content">
             {children}
