@@ -18,7 +18,7 @@ export default function Navbar() {
       <nav>
         <ul>
           <li><Link href="/movies" className={pathname.startsWith("/movies") ? "active": ""}>LIST</Link></li>
-          <li><Link href="/about" className={pathname === "/about" ? "active": ""}>ABOUT</Link></li>
+          <li><Link href="/" className={pathname === "/about" ? "active": ""}>ABOUT</Link></li>
         </ul>
       </nav>
       <div className="util">
