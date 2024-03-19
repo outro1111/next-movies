@@ -4,7 +4,7 @@ import Markdown from 'react-markdown'
 
 async function movieList(title) {
   // await new Promise((resolve) => setTimeout(resolve, 2000))
-  let url = `${process.env.API_URL}api/movies?populate=*&sort=createdAt%3Adesc`;
+  let url = `${process.env.API_URL}/api/movies?populate=*&sort=createdAt%3Adesc`;
   if (title) {
     url += `&filters[$or][0][title][$containsi]=${title}&filters[$or][1][titleOriginal][$containsi]=${title}`;
   }
