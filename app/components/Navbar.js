@@ -8,7 +8,6 @@ export default function Navbar() {
   const isMainPage = () => pathname === "/"
   // const isActive = (href) => pathname.startsWith(href);
   // const isActive = (href) => pathname === href;
-  console.log(pathname);
 
   return (
     <header id="header" className={isMainPage() ? "main": ""}>
@@ -18,7 +17,7 @@ export default function Navbar() {
       <nav>
         <ul>
           <li><Link href="/movies" className={pathname.startsWith("/movies") ? "active": ""}>LIST</Link></li>
-          <li><Link href="/" className={pathname === "/about" ? "active": ""}>ABOUT</Link></li>
+          <li><Link href="/about" className={pathname === "/about" ? "active": ""}>ABOUT</Link></li>
         </ul>
       </nav>
       <div className="util">

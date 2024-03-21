@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Markdown from "react-markdown"
 
 async function getMovieDetail(id) {
   // await new Promise((resolve) => setTimeout(resolve, 2000))
@@ -34,7 +35,7 @@ export default async function MovieDetailPage({ params: {id} }) {
       <div className="detail_con">
         <div className="description">
           <h2 className="detail_title">Storyline</h2>
-          <p>{movie.attributes.description}</p>
+          <Markdown>{movie.attributes.description}</Markdown>
         </div>
         <div className="poster">
           <Image src={movie.attributes.poster.data.attributes.formats.medium.url} alt={movie.attributes.poster.data.attributes.alternativeText} width={500} height={300} />
