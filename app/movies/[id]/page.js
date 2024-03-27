@@ -37,7 +37,7 @@ export default async function MovieDetailPage({ params: {id} }) {
     <>
     <div className="detail_movie">
       {/* {JSON.stringify(movie)} */}
-      {/* <div className="detail_top">
+      <div className="detail_top">
         <div className="top_bg">
           <Image src={movie.attributes.image.data[1].attributes.url} alt={movie.attributes.image.data[1].attributes.alternativeText} width={500} height={300} />
         </div>
@@ -46,9 +46,9 @@ export default async function MovieDetailPage({ params: {id} }) {
           <h2 className="titleOriginal">{movie.attributes.titleOriginal}</h2>
           <p className="genre">{movie.attributes.genre}</p>
           <p className="openingDate">{movie.attributes.openingDate}</p>
-        </div> */}
+        </div>
         {/* <p className="average" v-if="average"><span>{{ (average).toFixed(1) }}</span></p> <!-- 리뷰 평균 점수 toFixed로 소수점 처리 --> */}
-      {/* </div> */}
+      </div>
 
       <div className="detail_con">
         
