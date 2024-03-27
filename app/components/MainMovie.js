@@ -11,7 +11,7 @@ async function getMovie() {
   return data
 }
 
-export default async function Movies() {
+export default async function MainMovies() {
   const movies = await getMovie()
   return (
     <div className="main_movie">

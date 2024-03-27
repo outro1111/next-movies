@@ -16,7 +16,7 @@ async function movieList(title) {
   return data
 }
 
-export default async function Movies(props) {
+export default async function MovieList(props) {
   const title = props.title
   const movies = await movieList(title)
   return (
