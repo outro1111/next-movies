@@ -2,13 +2,15 @@ import Link from "next/link"
 import Image from "next/image"
 import Markdown from 'react-markdown'
 
-async function movieList(title) {
+const movieList = async (title) => {
   // await new Promise((resolve) => setTimeout(resolve, 2000))
   let url = `${process.env.API_URL}/api/movies?populate=*&sort=createdAt%3Adesc`;
   if (title) {
     url += `&filters[$or][0][title][$containsi]=${title}&filters[$or][1][titleOriginal][$containsi]=${title}`;
   }
-  const res = await fetch(url)
+  const res = await fetch(url, {
+    cache: "no-store"
+  })
   const json = await res.json()
   const data = json.data
   return data

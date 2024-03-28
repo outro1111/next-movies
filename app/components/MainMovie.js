@@ -2,7 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import Markdown from 'react-markdown'
 
-async function getMovie() {
+const getMovie = async () => {
   // await new Promise((resolve) => setTimeout(resolve, 2000))
   const res = await fetch(`${process.env.API_URL}/api/movies?populate=*&sort=publishedAt%3Adesc`)
   // const res = await fetch('https://strapi-movies-production.up.railway.app/api/movies?populate=*&sort=createdAt%3Adesc')
