@@ -7,10 +7,25 @@ import Markdown from "react-markdown"
 const getMovieDetail = async (id) => {
   // await new Promise((resolve) => setTimeout(resolve, 2000))
   // const res = await fetch(`https://strapi-movies-production.up.railway.app/api/movies/${id}?populate[0]=poster&populate[1]=cast.photo&populate[2]=image`)
-  const res = await fetch(`${process.env.API_URL}/api/movies/${id}?populate[0]=poster&populate[1]=cast.photo&populate[2]=image`)
-  const json = await res.json()
-  const data = json.data
-  return data
+  // const res = await fetch(`${process.env.API_URL}/api/movies/${id}?populate[0]=poster&populate[1]=cast.photo&populate[2]=image`)
+  // const res = await fetch(`${process.env.API_URL}/api/movies/${id}?populate=*`)
+  // const json = await res.json()
+  // const data = json.data
+  // console.log(data);
+  // return data
+
+  try {
+    const res = await fetch(`${process.env.API_URL}/api/movies/${id}?populate=*`, {
+        cache: "no-store",
+    });
+    const json = await res.json()
+    const data = json.data
+    console.log(data);
+    return data
+  }catch(error){
+      console.log(error);
+      return {}
+  }
 }
 
 // 리뷰 리스트 불러오기
@@ -66,7 +81,7 @@ export default async function MovieDetailPage({ params: {id} }) {
             {casts.map((cast) => (
               <li key={cast.id}>
                 <p className="photo">
-                  <Image src={cast.photo.data.attributes.url} alt={cast.photo.data.attributes.alternativeText} width={500} height={300} />
+                  {/* <Image src={cast.photo.data.attributes.url} alt={cast.photo.data.attributes.alternativeText} width={500} height={300} /> */}
                 </p>
                 <p className="name">{cast.name}</p>
                 <p className="role">{cast.role}</p>
