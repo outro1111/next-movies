@@ -3,10 +3,18 @@ import ReviewList from "../../components/ReviewList"
 import Image from "next/image"
 import Markdown from "react-markdown"
 
+export async function generateStaticParams() {
+  const res = await fetch(`${process.env.API_URL}/api/movies?populate=*&sort=createdAt%3Adesc`)
+
+  const json = await res.json()
+  const movies = json.data
+  return movies.map((movie) => ({
+    id: movie.id.toString()
+  }))
+}
+
 // 상세 정보 불러오기
 const getMovieDetail = async (id) => {
-  // await new Promise((resolve) => setTimeout(resolve, 2000))
-  // const res = await fetch(`https://strapi-movies-production.up.railway.app/api/movies/${id}?populate[0]=poster&populate[1]=cast.photo&populate[2]=image`)
   try {
     const res = await fetch(`${process.env.API_URL}/api/movies/${id}?populate[0]=poster&populate[1]=cast.photo&populate[2]=image`, {
       cache: "no-store",
