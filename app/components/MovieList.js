@@ -7,9 +7,7 @@ export default async function MovieList({title}) {
   if (title) {
     url += `&filters[$or][0][title][$containsi]=${title}&filters[$or][1][titleOriginal][$containsi]=${title}`;
   }
-  const res = await fetch(url, {
-    cache: "no-store"
-  })
+  const res = await fetch(url)
   const json = await res.json()
   const movies = json.data
 

@@ -16,8 +16,8 @@ export default function Navbar() {
       </h1>
       <nav>
         <ul>
-          <li><Link href="/movies"  prefetch="false" className={pathname.startsWith("/movies") ? "active": ""}>LIST</Link></li>
-          <li><Link href="/about"  prefetch="false" className={pathname === "/about" ? "active": ""}>ABOUT</Link></li>
+          <li><Link href="/movies" prefetch="false" className={pathname.startsWith("/movies") ? "active": ""}>LIST</Link></li>
+          <li><Link href="/about" prefetch="false" className={pathname === "/about" ? "active": ""}>ABOUT</Link></li>
         </ul>
       </nav>
       <div className="util">
