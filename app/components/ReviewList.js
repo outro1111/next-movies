@@ -28,7 +28,6 @@ export default function ReviewList(props) {
     e.preventDefault()
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/reviews`, {
-          cache: "no-store",
           method: 'POST',
           headers: {
             'Content-Type': 'application/json' // JSON 형태로 데이터 전송을 명시
