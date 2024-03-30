@@ -20,7 +20,7 @@ export default async function MainMovies() {
       <Image src={movies[1].attributes.image.data[1].attributes.url} alt="" width={500} height={300} />
       <div className="feature">
         <h1>Screenplay Now!</h1>
-          <Link href={`/movies/${movies[1].id}`}>
+          <Link href={`/movies/${movies[1].id}`} prefetch={true}>
             <strong>{movies[1].attributes.title }</strong>
             <em>{movies[1].attributes.titleOriginal}</em>
             <div className="description"><Markdown>{movies[1].attributes.description}</Markdown></div>
