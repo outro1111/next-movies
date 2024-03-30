@@ -46,7 +46,7 @@ export default function ReviewList(props) {
           // setReviews(prevReviews => [...prevReviews, newReview.data]);
           console.log(props.param, props.getReviews(props.param));
           await props.getReviews(props.param)
-          // alert('리뷰가 등록되었습니다.')
+          alert('리뷰가 등록되었습니다.')
           router.refresh();
         }
     }catch(error){
