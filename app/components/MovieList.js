@@ -2,8 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 import Markdown from 'react-markdown'
 
-const movieList = async (title) => {
-  // await new Promise((resolve) => setTimeout(resolve, 2000))
+export default async function MovieList({title}) {
   let url = `${process.env.API_URL}/api/movies?populate=*&sort=createdAt%3Adesc`;
   if (title) {
     url += `&filters[$or][0][title][$containsi]=${title}&filters[$or][1][titleOriginal][$containsi]=${title}`;
@@ -12,13 +11,8 @@ const movieList = async (title) => {
     cache: "no-store"
   })
   const json = await res.json()
-  const data = json.data
-  return data
-}
+  const movies = json.data
 
-export default async function MovieList(props) {
-  const title = props.title
-  const movies = await movieList(title)
   return (
     <ul className="list">
       {/* {JSON.stringify(movies)} */}
@@ -42,18 +36,3 @@ export default async function MovieList(props) {
     </ul>
   );
 }
-
-
-// async function movieList() {
-// await new Promise((resolve) => setTimeout(resolve, 5000))
-//   const res = await fetch('https://strapi-movies-production.up.railway.app/api/movies?populate=*');
-//   const json = await res.json();
-//   return json;
-// }
-
-// export default async function Home() {
-//   const movie = await movieList();
-//   return (
-//     <div>{JSON.stringify(movie)}</div>
-//   );
-// }
