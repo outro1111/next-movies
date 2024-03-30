@@ -1,11 +1,11 @@
-// import localFont from 'next/font/local'
+import localFont from 'next/font/local'
 import "./globals.css"
 import Navbar from './components/Navbar'
 
-// const pretendard = localFont({
-//   src: '../public/fonts/PretendardVariable.woff2',
-//   display: 'swap',
-// })
+const pretendard = localFont({
+  src: '../public/fonts/PretendardVariable.woff2',
+  display: 'swap',
+})
 
 export const metadata = {
   title: "Create Next App",
@@ -15,8 +15,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      {/* <body className={pretendard.className}> */}
-      <body>
+      <body className={pretendard.className}>
         <div id="wrap">
           <Navbar />
           <div id="content">
