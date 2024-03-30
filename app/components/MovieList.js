@@ -18,7 +18,7 @@ export default async function MovieList({title}) {
       {/* {JSON.stringify(movies)} */}
       {movies.map((movie) => (
         <li key={movie.id}>
-          <Link href={`/movies/${movie.id}`} prefetch="false">
+          <Link href={`/movies/${movie.id}`} prefetch={false}>
             <div className="thumb">
               <Image src={movie.attributes.image.data[0].attributes.formats.medium.url} alt={movie.attributes.image.data[0].attributes.alternativeText} width={500} height={300} />
             </div>
