@@ -56,7 +56,7 @@ html.dark-mode {
   --color-blue: #52a2fc;
 }
 
-html, body, div, span, a, form, input, select, button, textarea, legend, fieldset, h1, h2, h3, h4, h5, h6, ul, ol, dl, li, dt, dd, blockquote, address, p, th, td, caption, pre, nav, header {margin:0;padding:0;line-height:1.6;box-sizing:border-box;font-size:1vw;font-weight:400;color:var(--color-text);font-style:normal;box-sizing:border-box;}
+html, body, div, span, a, form, input, select, button, textarea, legend, fieldset, h1, h2, h3, h4, h5, h6, ul, ol, dl, li, dt, dd, blockquote, address, p, th, td, caption, pre, nav, header {margin:0;padding:0;line-height:1.6;box-sizing:border-box;font-size:1vw;font-weight:400;color:var(--color-text);font-style:normal;box-sizing:border-box;font-family:var(--font-pretendard);}
 body {background-color:var(--color-bg-body);color:var(--color-text);transition:background-color .3s ease;}
 input, select, textarea {padding:.2rem;border:1px solid rgba( 255, 255, 255, 0.3);background:rgba( 255, 255, 255, 0.1)}
 input::placeholder {color:var(--color-text-secondary);font-weight:400}

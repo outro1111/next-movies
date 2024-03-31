@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Rating } from "react-simple-star-rating";
+import { useFormatDate } from "../utils/useFormatDate"
 
 export default function ReviewList(props) {
   const router = useRouter();
@@ -13,6 +14,7 @@ export default function ReviewList(props) {
   const [reviews, setReviews] = useState([]);
   const [reviewInput, setReviewInput] = useState('');
   const [reviewRating, setReviewRating] = useState(1);
+  const {formatDateHour} = useFormatDate() 
   
   // 리뷰 리스트 불러오기
   useEffect(() => {
@@ -84,7 +86,7 @@ export default function ReviewList(props) {
                   <p className="rating">{review.attributes.rating}</p>
                   {/* <p className="name">{review.attributes.user.data.attributes.username}</p> */}
                   <p className="review">{review.attributes.content}</p>
-                  <p className="review_date">{review.attributes.publishedAt}</p>
+                  <p className="review_date">{ formatDateHour(review.attributes.publishedAt)}</p>
                   <div className="btn_right">
                     {/* {review.attributes.user.data.id === currentUser && (
                       <>

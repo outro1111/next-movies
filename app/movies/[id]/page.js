@@ -98,3 +98,15 @@ export default async function MovieDetailPage({ params: {id} }) {
     </>
   );
 }
+
+export async function generateMetadata({ params: {id} }) {
+  const movieMeta = await getMovieDetail(id)
+  let description = movieMeta.attributes.description
+  if (description.length > 50) {
+    description = description.substring(0, 50) + "...";
+  }
+  return {
+    title: `${movieMeta.attributes.title} | MovieRevue`,
+    description: description,
+  }
+}

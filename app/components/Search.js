@@ -17,7 +17,7 @@ export default function Form() {
     }
 
     replace(`${pathname}?${params.toString()}`);
-  };
+  }
 
   return (
     <input
@@ -26,5 +26,5 @@ export default function Form() {
         onChange={(event) => handleSearch(event.target.value)}
         defaultValue={searchParams.get("title") || ''}
     />
-  );
+  )
 }
