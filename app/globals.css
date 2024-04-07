@@ -229,6 +229,7 @@ html.dark-mode #header .btn_darkmode {mask-image:var(--icon-darkmode-light);}
 .detail_movie .reviews .review_login em {color:var(--color-blue);text-decoration:underline;font-style:normal;margin-right:6px;}
 .detail_movie .reviews .review_input {width:100%;background:var(--color-input-bg);border:1px solid var(--color-input-border);margin-top:.5rem;padding:.6rem;font-size:var(--font-size-content1);}
 .detail_movie .reviews .review_write {display:flex;justify-content:space-between;align-items:center;margin:clamp(6px, 2vw, 6px) 0 clamp(30px, 3vw, 50px)}
+.detail_movie .reviews .btn_update .btn {margin-left:clamp(6px, 1vw, 8px)}
 .detail_movie .reviews .star_rating {display:flex;align-items:center}
 .detail_movie .reviews .number {display:inline-block;width:clamp(22px, 2vw, 25px);height:clamp(22px, 2vw, 25px);border-radius:30px;margin-right:clamp(2px, 1.5vw, 6px);margin-top:-.4em;line-height:1.9;text-align:center;color:var(--color-fix-white);font-size:var(--font-size-small1);background:#333;}
 .detail_movie .reviews .average-rating {display:inline-block;height:clamp(18px, 1vw, 30px);margin-top:clamp(-20px, -2vw, -9px);}

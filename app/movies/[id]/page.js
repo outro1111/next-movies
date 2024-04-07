@@ -17,7 +17,6 @@ const getMovieDetail = async (id) => {
 
 // 리뷰 리스트 불러오기
 const getReviews = async (id) => {
-  "use server"
   try {
     const res = await fetch(`${process.env.API_URL}/api/reviews?&populate[0]=movie&populate[1]=reviews&filters[movie][id][$eq]=${id}&sort=publishedAt%3Adesc`, {
       cache: "no-store",
@@ -34,11 +33,9 @@ export default async function MovieDetailPage({ params: {id} }) {
   const reviews = await getReviews(id)
   const casts = movie.attributes.cast
   const photos = movie.attributes.image.data
-  // console.log(id);
   return (
     <>
     <div className="detail_movie">
-      {/* {JSON.stringify(movie)} */}
       <div className="detail_top">
         <div className="top_bg">
           <Image src={movie.attributes.image.data[1].attributes.url} alt={movie.attributes.image.data[1].attributes.alternativeText} width={500} height={300} />
@@ -49,7 +46,7 @@ export default async function MovieDetailPage({ params: {id} }) {
           <p className="genre">{movie.attributes.genre}</p>
           <p className="openingDate">{movie.attributes.openingDate}</p>
         </div>
-        {/* <p className="average" v-if="average"><span>{{ (average).toFixed(1) }}</span></p> <!-- 리뷰 평균 점수 toFixed로 소수점 처리 --> */}
+        {/* <p className="average"><span>{ (average).toFixed(1) }</span></p> <!-- 리뷰 평균 점수 toFixed로 소수점 처리 --> */}
       </div>
 
       <div className="detail_con">
@@ -89,7 +86,7 @@ export default async function MovieDetailPage({ params: {id} }) {
         </div>
 
         <Suspense fallback={<p className="nodata">로딩 중...</p>}>
-          <ReviewList param={id} reviews={reviews} getReviews={getReviews} />
+          <ReviewList param={id} reviews={reviews} />
         </Suspense>
         
       </div>
