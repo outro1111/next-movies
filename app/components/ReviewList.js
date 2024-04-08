@@ -11,7 +11,7 @@ export default function ReviewList(props) {
   const [reviewRating, setReviewRating] = useState(1); // 리뷰 점수 데이터
   const [putId, setPutId] = useState(0); // 수정할 리뷰 영화 id
   const [isEdit, setIsEdit] = useState(false); // 수정 상태
-  const textareaRef = useRef(''); // 포커스를 위한 textarea ref 참조
+  const textareaRef = useRef(null); // 포커스를 위한 textarea ref 참조
   const {formatDateHour} = useFormatDate() // 리뷰 날짜 포맷팅
   
   // 리뷰 리스트 불러오기
@@ -22,6 +22,18 @@ export default function ReviewList(props) {
   const catchRating = (rate) => { // Star 클릭 한 리뷰 점수 2배로 설정 5 -> 10 
     setReviewRating(rate * 2)
   }
+
+  // 리뷰 글쓰기 textarea 여러 줄 높이 자동 조절
+  const autoHeight = () => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = '75px'; // 기본 높이를 설정합니다.
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight + 5}px`; // 내용에 따라 높이를 조절합니다.
+    }
+  };
+  // 컴포넌트가 마운트될 때 autoHeight 함수를 실행, reviewInput(teaxarea value) 값 변경 시 실행
+  useEffect(() => {
+    autoHeight();
+  }, [reviewInput]);
 
   // 리뷰 작성
   const fnReviewPost = async () => {
@@ -155,7 +167,7 @@ export default function ReviewList(props) {
                 <p className="rating">{review.attributes.rating}</p>
                 {/* <p className="name">{review.attributes.user.data.attributes.username}</p> */}
                 <p className="review">{review.attributes.content}</p>
-                <p className="review_date">{ formatDateHour(review.attributes.publishedAt)}</p>
+                <p className="review_date">{ formatDateHour(review.attributes.createdAt)}</p>
                 <div className="btn_right">
                   {/* {review.attributes.user.data.id === currentUser && (
                     <> */}

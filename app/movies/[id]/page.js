@@ -18,7 +18,7 @@ const getMovieDetail = async (id) => {
 // 리뷰 리스트 불러오기
 const getReviews = async (id) => {
   try {
-    const res = await fetch(`${process.env.API_URL}/api/reviews?&populate[0]=movie&populate[1]=reviews&filters[movie][id][$eq]=${id}&sort=publishedAt%3Adesc`, {
+    const res = await fetch(`${process.env.API_URL}/api/reviews?&populate[0]=movie&populate[1]=reviews&filters[movie][id][$eq]=${id}&sort=createdAt%3Adesc`, {
       cache: "no-store",
     });
     const review = await res.json();
