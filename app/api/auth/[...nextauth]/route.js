@@ -10,7 +10,7 @@ export const authOptions = {
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" }
       },
-      async authorize (credentials, req) {
+      async authorize(credentials, req) {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/local`, {
           method: "POST",
           headers: {
@@ -25,68 +25,49 @@ export const authOptions = {
         console.log('user', user);
 
         if (user) {
-          // Any object returned will be saved in `user` property of the JWT
           return user
         } else {
-          // If you return null then an error will be displayed advising the user to check their details.
           return null
-
-          // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
         }
-        
-        // if (response.ok && data.token) {
-        //   return { token: data.token, rfToken: data.rfToken };
-        // } else {
-        //   // 로그인 실패 시 처리
-        //   throw new Error('Login failed!');
-        // }
-
-        // if (credentials?.email === user.email && credentials?.password === user.password) {
-        //   return user
-        // } else {
-        //   return null
-        // }
-
       }
     })
   ],
-  // session: { 
-  //   strategy: "jwt",
-  //   // maxAge: 1 * 24 * 60 * 60, // 1 day
-  // },
-  // callbacks: {
-  //   async jwt({ token, user }) {
-  //     return { ...token, ...user };
-  //     // token.accessToken = user.token
-  //     // return token
-  //   },
-
-  //   async session({ session, token }) {
-  //     session.user = token;
-  //     return session;
-  //   },
-  // },
-  // callbacks: {
-  //   session: async (session, user) => {
-  //     session.token = user.token;
-  //     console.log('세션', session);
-  //     return session;
-  //   },
-  //   jwt: async (token, user) => {
-  //     if (user) {
-  //       token = user; // { token: data.token, rfToken: data.rfToken }
-  //       console.log('토큰', token);
-  //     }
-  //     return token;
-  //   },
-  // },
+  callbacks: {
+    async jwt({ token, user }) { // 로그인 시, 사용자 정보를 토큰에 추가
+      if (user) {
+        const data = user
+        token.jwt = data.jwt;
+        token.id = data.user.id;
+        token.username = data.user.username;
+        token.email = data.user.email;
+      }
+      return token;
+    },
+    async session({ session, token }) { // JWT 콜백에서 추가된 사용자 정보를 세션에 반영
+      session.jwt = token.jwt;
+      session.user.id = token.id;
+      session.user.username = token.username;
+      session.user.email = token.email;
+      console.log('토큰', session.jwt);
+      return session;
+    },
+  },
   pages: {
     signIn: '/auth/signin',
     // signOut: '/auth/signout',
     // error: '/auth/error', // Error code passed in query string as ?error=
     // verifyRequest: '/auth/verify-request', // (used for check email message)
     // newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
-  }
+  },
+  // session: {
+  //   strategy: "jwt",
+  //   // maxAge: 1 * 24 * 60 * 60, // 1 day
+  // },
+  // database: process.env.NEXT_PUBLIC_DATABASE_URL,
+  // secret: process.env.NEXTAUTH_SECRET, // 여기 Secret Key
+  // jwt: {
+  //   maxAge: 60 * 60
+  // },
 }
 
 const handler = NextAuth(authOptions)

@@ -10,15 +10,12 @@ export default function SigninForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // const res = await signIn("credentials", {
     signIn("credentials", {
       email,
       password,
       // redirect: true,
-      callbackUrl: "/",
+      callbackUrl: sessionStorage.getItem("prevUrl") || "/"
     });
-    // console.log('res', res)
-    // return res
   }
 
   return (

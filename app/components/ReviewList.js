@@ -1,8 +1,10 @@
 "use client"
+import Link from "next/link"
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Rating } from "react-simple-star-rating";
 import { useFormatDate } from "../utils/useFormatDate"
+import { useSession } from "next-auth/react";
 
 export default function ReviewList(props) {
   const router = useRouter(); // 라우터 가져오기
@@ -13,7 +15,10 @@ export default function ReviewList(props) {
   const [isEdit, setIsEdit] = useState(false); // 수정 상태
   const textareaRef = useRef(null); // 포커스를 위한 textarea ref 참조
   const {formatDateHour} = useFormatDate() // 리뷰 날짜 포맷팅
-  
+  const { data: session } = useSession();
+  // const tokenjwt = session?.jwt
+  // console.log(tokenjwt);
+
   // 리뷰 리스트 불러오기
   useEffect(() => {
     setReviews(props.reviews.data) // props로 받은 리뷰 리스트 출력
@@ -33,34 +38,45 @@ export default function ReviewList(props) {
   // 컴포넌트가 마운트될 때 autoHeight 함수를 실행, reviewInput(teaxarea value) 값 변경 시 실행
   useEffect(() => {
     autoHeight();
-  }, [reviewInput]);
+  });
 
   // 리뷰 작성
   const fnReviewPost = async () => {
-    try {
+    if(reviewInput !== '') {
+      try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/reviews`, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json' // JSON 형태로 데이터 전송을 명시
+            'Content-Type': 'application/json', // JSON 형태로 데이터 전송을 명시
+            'Authorization': `Bearer ${session?.jwt}` // 토큰을 headers에 담아 전달
           },
           body: JSON.stringify({
             "data": {
               "movie": props.param,
               "content": reviewInput,
               "rating": reviewRating,
-              "user": null
+              "user": session?.user?.id
             }
           })
         });
+        console.log('에러', res.error);
+        if (!res.ok) { // 응답 상태가 성공적이지 않을 때
+          if (res.error === 'already review') { // strapi controllers의 error 메시지 비교
+            alert('리뷰는 한 영화에 한번만 작성 가능합니다.') // 중복체크 에러 메시지가 동일 할때 alert
+          }
+        }
         if (res.status >= 200 && res.status < 300) {
           alert('리뷰가 등록되었습니다.')
-          setReviewInput('') // 리뷰 textarea 값 초기화
-          setReviewRating('1') // 리뷰 점수 1점으로 초기화
+          fnReviewCancel() // 리뷰 수정 전 상태로 전환
           router.refresh()
         }
-    }catch(error){
-        console.log(error);
+      }catch(error){
+        alert(error);
         return {}
+      }
+    } else {
+      alert('감상평을 등록해주세요.')
+      textareaRef.current.focus(); // textarea 포커스
     }
   }
 
@@ -74,6 +90,7 @@ export default function ReviewList(props) {
         // }
       })
     }
+    fnReviewCancel() // 리뷰 수정 전 상태로 전환
     router.refresh()
   }
 
@@ -108,15 +125,13 @@ export default function ReviewList(props) {
             "movie": props.param,
             "content": reviewInput,
             "rating": reviewRating,
-            "user": null
+            "user": session?.user?.id
           }
         })
       });
       if (res.status >= 200 && res.status < 300) {
         alert('리뷰가 수정되었습니다.')
-        setReviewInput('') // 리뷰 textarea 값 초기화
-        setReviewRating('1') // 리뷰 점수 1점으로 초기화
-        setIsEdit(false) // 리뷰 수정 전 상태로 전환
+        fnReviewCancel() // 리뷰 수정 전 상태로 전환
         router.refresh()
       }
     }catch(error){
@@ -135,14 +150,18 @@ export default function ReviewList(props) {
   return (
     <div className="reviews">
       <h2 className="detail_title">Reviews</h2>
-      <textarea
-        className="review_input"
-        rows="5"
-        value={reviewInput}
-        onChange={(e) => setReviewInput(e.target.value)}
-        ref={textareaRef}
-        placeholder="감상평을 등록해주세요.">
-      </textarea>
+      {session ?
+        <textarea
+          className="review_input"
+          rows="5"
+          value={reviewInput}
+          onChange={(e) => setReviewInput(e.target.value)}
+          ref={textareaRef}
+          placeholder="감상평을 등록해주세요.">
+        </textarea>
+      :
+        <Link href="/api/auth/signin" className="review_login"><em>로그인</em> 후 리뷰를 입력해주세요.</Link>
+      }
 
       <div className="review_write">
         <div className="star_rating">
@@ -158,23 +177,23 @@ export default function ReviewList(props) {
           <button className="btn primary" onClick={fnReviewPost}>리뷰작성</button>
         )}
       </div>
-
+     
       <div className="review_list">
         {reviews.length > 0 ? (
           <ul>
             {reviews.map((review) => (
               <li key={review.id}>
                 <p className="rating">{review.attributes.rating}</p>
-                {/* <p className="name">{review.attributes.user.data.attributes.username}</p> */}
+                <p className="name">{review.attributes.user.data.attributes.username}</p>
                 <p className="review">{review.attributes.content}</p>
                 <p className="review_date">{ formatDateHour(review.attributes.createdAt)}</p>
                 <div className="btn_right">
-                  {/* {review.attributes.user.data.id === currentUser && (
-                    <> */}
+                  {review.attributes.user.data.id === session?.user?.id && (
+                    <>
                       <button className="btn sub" onClick={() => fnReviewGetView(review.id)}>수정</button>
                       <button className="btn sub" onClick={() => fnReviewDelete(review.id)}>삭제</button>
-                    {/* </>
-                  )} */}
+                    </>
+                  )}
                 </div>
               </li>
             ))}

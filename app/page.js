@@ -13,3 +13,12 @@ export default function HomePage({ searchParams: {title} }) {
     </>
   );
 }
+
+export const metadata = {
+  title: "Home | MovieRevue",
+  description: "MovieRevue Homepage",
+  openGraph: {
+    title: 'MovieRevue',
+    description: 'MovieRevue Homepage',
+  },
+}

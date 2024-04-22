@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import ReviewList from "../../components/ReviewList"
 import Image from "next/image"
 import Markdown from "react-markdown"
@@ -18,7 +17,7 @@ const getMovieDetail = async (id) => {
 // 리뷰 리스트 불러오기
 const getReviews = async (id) => {
   try {
-    const res = await fetch(`${process.env.API_URL}/api/reviews?&populate[0]=movie&populate[1]=reviews&filters[movie][id][$eq]=${id}&sort=createdAt%3Adesc`, {
+    const res = await fetch(`${process.env.API_URL}/api/reviews?populate[0]=reviews&populate[1]=user&filters[movie][id][$eq]=${id}&sort=createdAt%3Adesc`, {
       cache: "no-store",
     });
     const review = await res.json();
@@ -85,12 +84,9 @@ export default async function MovieDetailPage({ params: {id} }) {
           </ul>
         </div>
 
-        <Suspense fallback={<p className="nodata">로딩 중...</p>}>
-          <ReviewList param={id} reviews={reviews} />
-        </Suspense>
+        <ReviewList param={id} reviews={reviews} />
         
       </div>
-
     </div>
     </>
   );
