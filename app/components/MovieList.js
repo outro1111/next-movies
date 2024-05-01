@@ -1,6 +1,5 @@
 import Link from "next/link"
 import Image from "next/image"
-import Markdown from 'react-markdown'
 
 export default async function MovieList({title}) {
   let url = `${process.env.API_URL}/api/movies?populate=*&sort=createdAt%3Adesc`;
@@ -25,7 +24,7 @@ export default async function MovieList({title}) {
             <h2 className="title">{ movie.attributes.title }</h2>
             <h2 className="titleOriginal">{ movie.attributes.titleOriginal }</h2>
             
-            <div className="description"><Markdown>{movie.attributes.description}</Markdown></div>
+            <div className="description">{movie.attributes.description}</div>
             <div className="info">
               <span className="genre">{ movie.attributes.genre }</span>
               <span className="openingDate">{ movie.attributes.openingDate }</span>

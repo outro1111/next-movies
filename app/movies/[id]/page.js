@@ -1,3 +1,4 @@
+import AverageRating from "@/app/components/AverageRating";
 import ReviewList from "../../components/ReviewList"
 import Image from "next/image"
 import Markdown from "react-markdown"
@@ -5,7 +6,7 @@ import Markdown from "react-markdown"
 // 상세 정보 불러오기
 const getMovieDetail = async (id) => {
   try {
-    const res = await fetch(`${process.env.API_URL}/api/movies/${id}?populate[0]=poster&populate[1]=cast.photo&populate[2]=image`);
+    const res = await fetch(`${process.env.API_URL}/api/movies/${id}?populate[0]=poster&populate[1]=cast.photo&populate[2]=image`, {cache: "no-store",});
     const json = await res.json()
     const data = json.data
     return data
@@ -45,6 +46,7 @@ export default async function MovieDetailPage({ params: {id} }) {
           <p className="genre">{movie.attributes.genre}</p>
           <p className="openingDate">{movie.attributes.openingDate}</p>
         </div>
+        <AverageRating param={id} reviews={reviews} />
         {/* <p className="average"><span>{ (average).toFixed(1) }</span></p> <!-- 리뷰 평균 점수 toFixed로 소수점 처리 --> */}
       </div>
 

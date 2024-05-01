@@ -48,7 +48,6 @@ export default function ReviewList(props) {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json', // JSON 형태로 데이터 전송을 명시
-            'Authorization': `Bearer ${session?.jwt}` // 토큰을 headers에 담아 전달
           },
           body: JSON.stringify({
             "data": {
@@ -59,9 +58,10 @@ export default function ReviewList(props) {
             }
           })
         });
-        console.log('에러', res.error);
-        if (!res.ok) { // 응답 상태가 성공적이지 않을 때
-          if (res.error === 'already review') { // strapi controllers의 error 메시지 비교
+        const data = await res.json();
+        console.log(data, res);
+        if (!res.ok) { // 응답 상태가 성공적이지 않을 때 409 Conflict
+          if (data.error === 'already review') { // strapi controllers의 error 메시지 비교
             alert('리뷰는 한 영화에 한번만 작성 가능합니다.') // 중복체크 에러 메시지가 동일 할때 alert
           }
         }
@@ -85,9 +85,9 @@ export default function ReviewList(props) {
     if(confirm('삭제하시겠습니까?')) { 
       await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/reviews/${id}`, {
         method: 'DELETE',
-        // headers: {
-        //   // 'Authorization': `Bearer ${userToken}` // 토큰을 headers에 담아 전달
-        // }
+        headers: {
+          'Authorization': `Bearer ${session?.jwt}` // 토큰을 headers에 담아 전달
+        }
       })
     }
     fnReviewCancel() // 리뷰 수정 전 상태로 전환
@@ -118,7 +118,8 @@ export default function ReviewList(props) {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/reviews/${putId}`, {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json' // JSON 형태로 데이터 전송을 명시
+          'Content-Type': 'application/json', // JSON 형태로 데이터 전송을 명시
+          'Authorization': `Bearer ${session?.jwt}` // 토큰을 headers에 담아 전달
         },
         body: JSON.stringify({
           "data": {

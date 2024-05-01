@@ -48,25 +48,24 @@ export const authOptions = {
       session.user.id = token.id;
       session.user.username = token.username;
       session.user.email = token.email;
-      console.log('토큰', session.jwt);
       return session;
     },
   },
-  pages: {
-    signIn: '/auth/signin',
-    // signOut: '/auth/signout',
-    // error: '/auth/error', // Error code passed in query string as ?error=
-    // verifyRequest: '/auth/verify-request', // (used for check email message)
-    // newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
+  session: {
+    strategy: "jwt",
+    maxAge: 1 * 24 * 60 * 60, // 1 day
   },
-  // session: {
-  //   strategy: "jwt",
-  //   // maxAge: 1 * 24 * 60 * 60, // 1 day
+  // pages: {
+  //   signIn: '/auth/signin',
+  //   signOut: '/auth/signout',
+  //   error: '/auth/error', // Error code passed in query string as ?error=
+  //   verifyRequest: '/auth/verify-request', // (used for check email message)
+  //   newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
   // },
   // database: process.env.NEXT_PUBLIC_DATABASE_URL,
   // secret: process.env.NEXTAUTH_SECRET, // 여기 Secret Key
   // jwt: {
-  //   maxAge: 60 * 60
+  //   maxAge: 1 * 24 * 60 * 60, // 1 day
   // },
 }
 
