@@ -148,7 +148,7 @@ html.dark-mode #header .btn_darkmode {mask-image:var(--icon-darkmode-light);}
 .error h2 {font-size:var(--font-size-title2)}
 .error p {font-size:var(--font-size-content1);padding:0.5rem 0 0;}
 .error p + p {padding:0.2rem 0 2rem;}
-.sub_title {position:relative;width:100%;text-align:center;font-weight:800;font-size:var(--font-size-title4);margin-top:clamp(38px, 3vw, 54px);z-index:5}
+.sub_title {position:relative;width:100%;text-align:center;font-weight:600;font-size:var(--font-size-title3);margin-top:clamp(38px, 4vw, 68px);z-index:5}
 .btn {position:relative;font-size:var(--font-size-content1);line-height:1.5;color:var(--color-text);background:var(--color-bg-body);border:1px solid var(--color-text-secondary);padding:clamp(4px, 1vw, 6px) clamp(10px, 1vw, 18px);cursor:pointer;transition:color 0.3s ease;z-index:1}
 .btn:before{content:'';position:absolute;top:0;left:0;width:0;height:100%;background:var(--color-bg);transition:width 0.3s ease;z-index:-1}
 .btn:hover{color:var(--color-text-inversion);}
@@ -170,7 +170,10 @@ html.dark-mode #header .btn_darkmode {mask-image:var(--icon-darkmode-light);}
 /* @media screen and (max-width:800px) {
   .main_movie {position:relative;height:88vh}
 } */
-.search_result {position:relative;width:100%;text-align:center;font-size:var(--font-size-content2);margin:clamp(20px, 2vw, 30px) 0}
+.list_search {position:relative;width:40rem;min-width:200px;max-width:500px;text-align:center;margin:5em auto 3em}
+.list_search input {width:100%;font-size:var(--font-size-title1);border-bottom:1px solid var(--color-bg);padding:.4rem 0 .4rem 30px}
+.list_search:after {content:'';position:absolute;left:0;top:clamp(8px, 1rem, 17px);width:23px;height:23px;padding:0;border:0 none;cursor:pointer;background:var(--color-text);mask-image:var(--icon-search)}
+.search_result {position:relative;width:100%;text-align:center;font-size:var(--font-size-content2);margin:clamp(10px, 1.5vw, 20px) 0 clamp(30px, 2vw, 40px)}
 .search_result strong {color:var(--color-blue)}
 .list {display:grid;grid-template-columns:1fr 1fr 1fr ;row-gap:10px;column-gap:20px;width:100%;max-width:1600px;padding:0 2rem;margin:1rem auto}
 .list li {position:relative;overflow:hidden;padding:clamp(20px, 2vw, 20px) 0 clamp(30px, 3vw, 45px);text-align:center}
@@ -181,9 +184,9 @@ html.dark-mode #header .btn_darkmode {mask-image:var(--icon-darkmode-light);}
 .list li .titleOriginal {margin-bottom:clamp(12px, 1.5vw, 16px);font-size:var(--font-size-small1);text-align:left;line-height:1;color:var(--color-text-secondary);width:100%;text-overflow:ellipsis;overflow:hidden;word-wrap:break-word;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;}
 .list li .description {text-align:left;text-overflow:ellipsis;overflow:hidden;word-wrap:break-word;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;}
 .list li .description {font-size:var(--font-size-content1)}
-.list li .info {display:flex;margin:0.5rem 0;justify-content:space-between;}
-.list li .genre {height:1em;line-height:.9;font-size:var(--font-size-small1);background:var(--color-text-secondary);color:var(--color-text-inversion)}
-.list li .info .openingDate {padding:.0 .6rem;font-size:var(--font-size-small1);color:var(--color-text-secondary)}
+.list li .info {display:flex;margin:0.5rem 0}
+.list li .genre {font-size:var(--font-size-small1)}
+.list li .info .openingDate {padding:0 .6em;font-size:var(--font-size-small1);color:var(--color-text-secondary)}
 .list li h2, .list li p {margin-left:0.2rem;margin-right:0.2rem;}
 @media screen and (max-width:800px) {
   .list {grid-template-columns:1fr;padding:0}

@@ -39,7 +39,7 @@ export default function MovieSearch() {
           value={movieSearch}
           onChange={(e) => setMovieSearch(e.target.value.trim())}
           onKeyUp={(e) => e.key === 'Enter' && fnSearch()}
-          placeholder="Search for movies"
+          placeholder="영화 제목 검색"
         />
         <button className="btn_search" onClick={fnSearch}>
           <span className="sr_only">Search</span>

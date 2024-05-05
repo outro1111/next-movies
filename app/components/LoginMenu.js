@@ -23,8 +23,8 @@ export default function LoginMenu() {
           <span className="arrow"></span>
         </button>
         {userOpen && (
-          <div className={`user_layer ${userOpen ? 'active' : ''}`} onClick={() => setUserOpen(false)}>
-            <div className="user_layer_in"></div>
+          <div className={`user_layer ${userOpen ? 'active' : ''}`}>
+            <div className="user_layer_in" onClick={() => setUserOpen(false)}></div>
             <p className="user_info">
               <span className="name">{session.user.username}</span>
               <span className="email">{session.user.email}</span>

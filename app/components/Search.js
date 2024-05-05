@@ -20,11 +20,12 @@ export default function Form() {
   }
 
   return (
-    <input
-        style={{border:"1px solid black", margin:"40px 40px 0", fontSize:"20px"}}
-        placeholder="test"
-        onChange={(event) => handleSearch(event.target.value)}
-        defaultValue={searchParams.get("title") || ''}
-    />
+    <div className="list_search">
+      <input
+          placeholder="영화 제목 검색"
+          onChange={(event) => handleSearch(event.target.value)}
+          defaultValue={searchParams.get("title") || ''}
+      />
+    </div>
   )
 }
