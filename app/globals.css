@@ -157,6 +157,15 @@ html.dark-mode #header .btn_darkmode {mask-image:var(--icon-darkmode-light);}
 .btn:disabled {border:1px solid var(--color-disabled-border);color:var(--color-text-secondary);background:var(--color-disabled-bg);}
 .btn:disabled:before {display:none;}
 
+.pagination {display:flex;margin-top:25px;border-radius:4px;justify-content:center;}
+.pagination li a span {position:relative;display:block;font-size:var(--font-size-small1);padding:clamp(1px, 1vw, 2px) clamp(8px, 1vw, 10px);color:var(--color-text);border:0 none;background:none;cursor:pointer;transition:background-color .3s ease;}
+.pagination li.page-util {padding:0}
+.pagination li.page-util a span {transform:scale3d(.8, 1.6, 1)}
+.pagination li a.disabled {cursor:default;pointer-events:none;}
+.pagination li a.disabled span {color:var(--color-disabled-border)}
+.pagination li {display:inline-flex;align-items:center;padding:.0 .6em}
+.pagination li a span.active {background-color:var(--color-bg);color:var(--color-bg-inversion)}
+
 .main_movie {position:relative;height:90vh;margin-bottom:4rem}
 .main_movie:before {content:'';position:absolute;top:0;right:0;bottom:0;left:0;background:rgba(0, 0, 0, 0.30)}
 .main_movie:after {content:'';position:absolute;top:0;right:0;bottom:0;left:0;background:linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.3) 32%, rgba(0,0,0,0) 57%, rgba(0,0,0,0) 100%)}

@@ -1,8 +1,12 @@
 import MovieList from '../components/MovieList'
+import Search from "../components/Search";
 
-export default function MoviesPage({ searchParams: {title} }) {
+export default function MoviesPage({ searchParams: {title, page, pageSize, pageCount} }) {
   return (
-      <MovieList title={title} />
+    <>
+      <Search />
+      <MovieList title={title} page={page} pageSize={pageSize} pageCount={pageCount} showPagination={true} />
+    </>
   );
 }
 

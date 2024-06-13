@@ -6,7 +6,7 @@ export default function HomePage({ searchParams: {title} }) {
   return (
     <>
       <MainMovie />
-      <MovieList title={title} />
+      <MovieList title={title} showPagination={false} />
       {/* <Suspense fallback={<p className="nodata">검색 결과가 없습니다.</p>}>
         <MovieList />
       </Suspense> */}

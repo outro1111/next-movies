@@ -2,7 +2,6 @@
 import { useRouter } from 'next/navigation';
 import { useState, useRef } from 'react';
 
-
 export default function MovieSearch() {
   const router = useRouter()
   const [movieSearch, setMovieSearch] = useState('');

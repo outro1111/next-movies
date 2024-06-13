@@ -9,7 +9,9 @@ export default function Form() {
   const { replace } = useRouter();
 
   const handleSearch = (term) => {
+    console.log(`Searching... ${term}`);
     const params = new URLSearchParams(searchParams);
+    params.set('page', '1');
     if (term) {
       params.set('title', term);
     } else {
