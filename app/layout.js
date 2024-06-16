@@ -2,6 +2,7 @@
 import localFont from 'next/font/local'
 import "./globals.css"
 import Navbar from './components/Navbar'
+import { ThemeProvider } from 'next-themes'
 import { SessionProvider } from "next-auth/react"
 
 const pretendard = localFont({
@@ -11,15 +12,17 @@ const pretendard = localFont({
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning> {/* 다크모드 next-themes  */}
       <body className={pretendard.className}>
         <SessionProvider>
-          <div id="wrap">
-            <Navbar />
-            <div id="content">
-              {children}
+          <ThemeProvider  enableSystem={true} attribute="class">
+            <div id="wrap">
+              <Navbar />
+              <div id="content">
+                {children}
+              </div>
             </div>
-          </div>
+          </ThemeProvider>
         </SessionProvider>
       </body>
     </html>
